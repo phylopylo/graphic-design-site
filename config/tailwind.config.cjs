@@ -76,11 +76,24 @@ module.exports = {
         glow: {
           '0%, 100%': { opacity: 1 },
           '50%': { opacity: 0.7 },
+        },
+        shimmer: {
+          '0%': { backgroundPosition: '200% 0' },
+          '100%': { backgroundPosition: '-200% 0' },
         }
       },
       animation: {
         float: 'float 6s ease-in-out infinite',
         glow: 'glow 3s ease-in-out infinite',
+        shimmer: 'shimmer 8s linear infinite',
+      },
+      transitionDelay: {
+        '2000': '2000ms',
+        '3000': '3000ms',
+        '4000': '4000ms',
+      },
+      backgroundSize: {
+        '200%': '200%',
       },
     },
   },

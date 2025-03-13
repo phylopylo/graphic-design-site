@@ -15,22 +15,37 @@
 
 @layer components {
   .btn {
-    @apply px-4 py-2 rounded-md font-medium transition-colors duration-200;
+    @apply px-6 py-3 rounded-lg font-medium transition-all duration-300 transform hover:-translate-y-0.5;
   }
   
   .btn-primary {
-    @apply btn bg-accent text-white hover:bg-accent-dark;
+    @apply btn bg-accent text-white hover:bg-accent-dark shadow-soft hover:shadow-glow;
+    background-image: linear-gradient(135deg, var(--tw-gradient-from) 0%, var(--tw-gradient-to) 100%);
+    background-size: 200% auto;
+    transition: all 0.5s ease;
   }
   
   .btn-secondary {
-    @apply btn bg-white text-text-secondary border border-gray-300 hover:bg-gray-50;
+    @apply btn bg-white/80 backdrop-blur-sm text-text-secondary border border-gray-200 
+           hover:bg-white hover:border-accent/20 hover:text-accent shadow-soft;
   }
 
   .card {
-    @apply bg-surface rounded-lg shadow-soft p-6;
+    @apply bg-surface/80 backdrop-blur-sm rounded-xl shadow-soft hover:shadow-glow 
+           transition-all duration-300 border border-white/10;
   }
 
   .input {
-    @apply w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent;
+    @apply w-full px-4 py-3 border border-gray-200 rounded-lg shadow-soft
+           focus:outline-none focus:ring-2 focus:ring-accent/20 focus:border-accent
+           bg-white/80 backdrop-blur-sm transition-all duration-300;
+  }
+
+  .animation-delay-2000 {
+    animation-delay: 2000ms;
+  }
+
+  .animation-delay-4000 {
+    animation-delay: 4000ms;
   }
 }
