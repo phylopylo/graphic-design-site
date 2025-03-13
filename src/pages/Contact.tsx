@@ -40,11 +40,13 @@ const supportCategories = [
 
 export default function Contact() {
   const [form, setForm] = useState<ContactForm>(initialForm);
+  const [formSubmitted, setFormSubmitted] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission
-    console.log('Form submitted:', form);
+    // Simulate form submission
+    setFormSubmitted(true);
+    setTimeout(() => setFormSubmitted(false), 3000);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -113,64 +115,76 @@ export default function Contact() {
             className="bg-surface rounded-2xl p-8 shadow-ethereal"
           >
             <h2 className="font-display text-3xl text-text-primary mb-8">Send Us a Message</h2>
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div>
-                <label htmlFor="name" className="block text-text-primary mb-2">Name</label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  value={form.name}
-                  onChange={handleChange}
-                  className="w-full px-4 py-3 bg-background rounded-xl border border-text-subtle/10 focus:outline-none focus:ring-2 focus:ring-accent/20 text-text-primary"
-                  required
-                />
-              </div>
-              <div>
-                <label htmlFor="email" className="block text-text-primary mb-2">Email</label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={form.email}
-                  onChange={handleChange}
-                  className="w-full px-4 py-3 bg-background rounded-xl border border-text-subtle/10 focus:outline-none focus:ring-2 focus:ring-accent/20 text-text-primary"
-                  required
-                />
-              </div>
-              <div>
-                <label htmlFor="subject" className="block text-text-primary mb-2">Subject</label>
-                <input
-                  type="text"
-                  id="subject"
-                  name="subject"
-                  value={form.subject}
-                  onChange={handleChange}
-                  className="w-full px-4 py-3 bg-background rounded-xl border border-text-subtle/10 focus:outline-none focus:ring-2 focus:ring-accent/20 text-text-primary"
-                  required
-                />
-              </div>
-              <div>
-                <label htmlFor="message" className="block text-text-primary mb-2">Message</label>
-                <textarea
-                  id="message"
-                  name="message"
-                  value={form.message}
-                  onChange={handleChange}
-                  rows={5}
-                  className="w-full px-4 py-3 bg-background rounded-xl border border-text-subtle/10 focus:outline-none focus:ring-2 focus:ring-accent/20 text-text-primary resize-none"
-                  required
-                />
-              </div>
-              <motion.button
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                type="submit"
-                className="w-full py-4 bg-accent text-white rounded-full shadow-glow hover:shadow-glow-lg transition-shadow duration-300"
+            {formSubmitted ? (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.5 }}
+                className="text-center text-accent"
               >
-                Send Message
-              </motion.button>
-            </form>
+                <p className="text-2xl">Thank you for reaching out!</p>
+                <p>We'll get back to you shortly.</p>
+              </motion.div>
+            ) : (
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div>
+                  <label htmlFor="name" className="block text-text-primary mb-2">Name</label>
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    value={form.name}
+                    onChange={handleChange}
+                    className="w-full px-4 py-3 bg-background rounded-xl border border-text-subtle/10 focus:outline-none focus:ring-2 focus:ring-accent/20 text-text-primary"
+                    required
+                  />
+                </div>
+                <div>
+                  <label htmlFor="email" className="block text-text-primary mb-2">Email</label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    value={form.email}
+                    onChange={handleChange}
+                    className="w-full px-4 py-3 bg-background rounded-xl border border-text-subtle/10 focus:outline-none focus:ring-2 focus:ring-accent/20 text-text-primary"
+                    required
+                  />
+                </div>
+                <div>
+                  <label htmlFor="subject" className="block text-text-primary mb-2">Subject</label>
+                  <input
+                    type="text"
+                    id="subject"
+                    name="subject"
+                    value={form.subject}
+                    onChange={handleChange}
+                    className="w-full px-4 py-3 bg-background rounded-xl border border-text-subtle/10 focus:outline-none focus:ring-2 focus:ring-accent/20 text-text-primary"
+                    required
+                  />
+                </div>
+                <div>
+                  <label htmlFor="message" className="block text-text-primary mb-2">Message</label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    value={form.message}
+                    onChange={handleChange}
+                    rows={5}
+                    className="w-full px-4 py-3 bg-background rounded-xl border border-text-subtle/10 focus:outline-none focus:ring-2 focus:ring-accent/20 text-text-primary resize-none"
+                    required
+                  />
+                </div>
+                <motion.button
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  type="submit"
+                  className="w-full py-4 bg-accent text-white rounded-full shadow-glow hover:shadow-glow-lg transition-shadow duration-300"
+                >
+                  Send Message
+                </motion.button>
+              </form>
+            )}
           </motion.div>
         </div>
 
