@@ -14,20 +14,32 @@ echo "Starting development server..."
 npm run dev &
 SERVER_PID=$!
 
-# Wait a few seconds for the server to start
+# Wait for the server to be ready
 echo "Waiting for server to be ready..."
 sleep 5
 
-# Open in Brave browser using Windows path
-echo "Opening in Brave browser..."
-BRAVE_PATH="/mnt/c/Program Files/BraveSoftware/Brave-Browser/Application/brave.exe"
-if [ -f "$BRAVE_PATH" ]; then
-    "$BRAVE_PATH" "http://localhost:5173"
-else
-    echo "Error: Brave browser not found at $BRAVE_PATH"
-    exit 1
-fi
+# Run tests
+echo "Running tests..."
+npm test -- --run
 
-# Show server output and wait for it to finish
-echo "Server is running. Press Ctrl+C to stop."
-wait $SERVER_PID 
+# If tests pass, open the browser
+if [ $? -eq 0 ]; then
+    echo "Tests passed! Opening in browser..."
+    # Open in Brave browser using Windows path
+    BRAVE_PATH="/mnt/c/Program Files/BraveSoftware/Brave-Browser/Application/brave.exe"
+    if [ -f "$BRAVE_PATH" ]; then
+        "$BRAVE_PATH" "http://localhost:5173"
+    else
+        echo "Error: Brave browser not found at $BRAVE_PATH"
+        kill $SERVER_PID
+        exit 1
+    fi
+
+    # Show server output and wait for it to finish
+    echo "Server is running. Press Ctrl+C to stop."
+    wait $SERVER_PID
+else
+    echo "Tests failed! Stopping server and exiting."
+    kill $SERVER_PID
+    exit 1
+fi 
