@@ -8,7 +8,8 @@
   }
   
   body {
-    @apply bg-background text-text;
+    @apply bg-background;
+    @apply text-text-primary;
   }
 }
 
@@ -18,18 +19,18 @@
   }
   
   .btn-primary {
-    @apply btn bg-primary-600 text-white hover:bg-primary-700;
+    @apply btn bg-accent text-white hover:bg-accent-dark;
   }
   
   .btn-secondary {
-    @apply btn bg-white text-gray-700 border border-gray-300 hover:bg-gray-50;
+    @apply btn bg-white text-text-secondary border border-gray-300 hover:bg-gray-50;
   }
 
   .card {
-    @apply bg-white rounded-lg shadow-md p-6;
+    @apply bg-surface rounded-lg shadow-soft p-6;
   }
 
   .input {
-    @apply w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500;
+    @apply w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent;
   }
 }
